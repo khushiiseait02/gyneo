@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Gynae Diagnosis</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #F8E6FF, #ECE1FF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 40px 35px;
+            border-radius: 20px;
+            box-shadow: 0 12px 25px rgba(138, 43, 226, 0.2);
+            width: 320px;
+            text-align: center;
+        }
+        h2 {
+            color: #6A5ACD;
+            margin-bottom: 25px;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 12px;
+            border: 1px solid #D8BFD8;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #9370DB, #BA55D3);
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Choose Username" required>
+
+        <input type="password" name="password" placeholder="Choose Password" required>
+
+        <input type="number" name="age" placeholder="Age (Above 10)" min="11" required>
+
+        <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+        </select>
+
+        <button type="submit">Create Account</button>
+    </form>
+
+    <p>Already have an account?
+        <a href="{{ url_for('auth.login') }}">Login</a>
+    </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symptom Result</title>
+</head>
+<body>
+    <h2>🧾 Symptom Analysis</h2>
+    <p><b>Your symptoms:</b> {{ symptoms }}</p>
+    <p><b>Possible Conditions:</b> {{ conditions }}</p>
+    <h3>✅ Recommendations:</h3>
+    <ul>
+        {% for r in recommendations %}
+            <li>{{ r }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('routes.symptom_checker') }}">🔙 Check Again</a>
+</body>
+</html>

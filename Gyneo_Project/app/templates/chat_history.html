@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History - GyneCare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin: 0;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button.delete {
+            background: #dc3545;
+        }
+        
+        button.export {
+            background: #28a745;
+        }
+        
+        .chat-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .chat-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .chat-item {
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            transition: background 0.3s;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chat-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .chat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .chat-item .type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .chat-item .type.user {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .chat-item .type.bot {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .chat-item .message {
+            color: #333;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        
+        .chat-item .timestamp {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-history"></i> Chat History</h1>
+            <div class="actions">
+                <button class="export" onclick="exportHistory()">
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <button class="delete" onclick="deleteHistory()">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+        </div>
+        
+        <div class="chat-container">
+            <div class="chat-list" id="chatList">
+                <div class="empty-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading chat history...</p>
+                </div>
+            </div>
+        </div>
+        
+        <a href="/dashboard" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+    
+    <script>
+        async function loadChatHistory() {
+            try {
+                const response = await fetch('/api/chat_history?limit=100');
+                const data = await response.json();
+                
+                const chatList = document.getElementById('chatList');
+                
+                if (data.success && data.messages && data.messages.length > 0) {
+                    chatList.innerHTML = '';
+                    data.messages.forEach(msg => {
+                        const item = document.createElement('div');
+                        item.className = 'chat-item';
+                        item.innerHTML = `
+                            <span class="type ${msg.type}">${msg.type.toUpperCase()}</span>
+                            <div class="message">${escapeHtml(msg.message)}</div>
+                            <div class="timestamp">${new Date(msg.timestamp).toLocaleString()}</div>
+                        `;
+                        chatList.appendChild(item);
+                    });
+                } else {
+                    chatList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-comments"></i>
+                            <p>No chat history yet. Start a conversation!</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading chat history:', error);
+                document.getElementById('chatList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Error loading chat history</p>
+                    </div>
+                `;
+            }
+        }
+        
+        async function deleteHistory() {
+            if (confirm('Are you sure you want to delete all chat history? This cannot be undone.')) {
+                try {
+                    const response = await fetch('/api/delete_chat_history', {
+                        method: 'POST'
+                    });
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        alert('Chat history deleted successfully');
+                        loadChatHistory();
+                    } else {
+                        alert('Error: ' + data.error);
+                    }
+                } catch (error) {
+                    alert('Error deleting chat history: ' + error.message);
+                }
+            }
+        }
+        
+        function exportHistory() {
+            const link = document.createElement('a');
+            link.href = '/api/export_chat_history';
+            link.download = 'chat_history.json';
+            link.click();
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Load on page load
+        loadChatHistory();
+    </script>
+</body>
+</html>

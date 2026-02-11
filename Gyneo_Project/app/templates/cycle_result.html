@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menstrual Cycle Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fda9ff, #d8b5ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px 35px;
+            border-radius: 15px;
+            width: 420px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+
+        h2 {
+            text-align: center;
+            color: #880e4f;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 12px;
+            color: #4a0072;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #6a1b9a;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4a0072;
+        }
+
+        .flash {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .flash.error {
+            background: #fdecea;
+            color: #c62828;
+        }
+
+        .note {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #555;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>📅 Menstrual Cycle Tracker</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('routes.cycle_result') }}">
+
+        <label>Age (10–55 years)</label>
+        <input type="number"
+               name="age"
+               min="10"
+               max="55"
+               required
+               placeholder="Enter your age">
+
+        <label>Weight (kg)</label>
+        <input type="number"
+               name="weight"
+               min="30"
+               step="0.1"
+               required
+               placeholder="Enter your weight">
+
+        <label>Cycle Length (days)</label>
+        <input type="number"
+               name="cycle_length"
+               min="20"
+               max="45"
+               required
+               placeholder="Enter cycle length">
+
+        <label>Last Period Date</label>
+        <input type="date" name="last_period" required>
+
+        <button type="submit">Predict Next Cycle</button>
+
+    </form>
+
+    <div class="note">
+        * This tool is for educational purposes only and does not replace medical advice.
+    </div>
+
+</div>
+
+</body>
+</html>

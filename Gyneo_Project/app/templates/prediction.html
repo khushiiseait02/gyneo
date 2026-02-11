@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnosis Result - GyneCare</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #F3E8FF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(100, 0, 200, 0.2);
+            width: 700px;
+        }
+        h2 {
+            color: #6A0DAD;
+            text-align: center;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 250px;
+            border-radius: 10px;
+        }
+        .section {
+            margin-top: 25px;
+        }
+        h3 {
+            color: #4B0082;
+        }
+        ul {
+            color: #333;
+            line-height: 1.6;
+        }
+        .alert {
+            color: #D32F2F;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+        }
+        a {
+            display: block;
+            width: fit-content;
+            margin: 25px auto 0;
+            padding: 10px 25px;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #9C27B0, #7B1FA2);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+        }
+        #predictionChart {
+            max-width: 600px;
+            margin: 30px auto;
+        }
+    </style>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<div class="container">
+
+    <h2>🩺 Diagnosis Result</h2>
+
+    <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Scan">
+
+    <p><strong>Prediction:</strong> {{ prediction }}</p>
+    <p><strong>Confidence:</strong> {{ confidence }}%</p>
+
+    {% if alert %}
+        <p class="alert">{{ alert }}</p>
+    {% endif %}
+
+    <div class="section">
+        <h3>Prediction Probability Graph</h3>
+        <canvas id="predictionChart"></canvas>
+    </div>
+
+    <div class="section">
+        <h3>Possible Causes</h3>
+        <ul>
+            {% for c in causes %}
+                <li>{{ c }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Preventions</h3>
+        <ul>
+            {% for p in preventions %}
+                <li>{{ p }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Medicines</h3>
+        <ul>
+            {% for m in medicines %}
+                <li>{{ m }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="{{ url_for('routes.upload') }}">🔄 Upload Another Image</a>
+
+</div>
+
+<script>
+    // Prevent chart duplication
+    const canvas = document.getElementById('predictionChart');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{{ prediction|tojson }}],
+                datasets: [{
+                    label: 'Confidence (%)',
+                    data: [{{ confidence }}],
+                    backgroundColor: 'rgba(156, 39, 176, 0.7)',
+                    borderColor: 'rgba(106, 13, 173, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Predicted Disease Confidence'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

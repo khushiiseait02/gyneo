@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menstrual Cycle Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #d8b5ff, #fda9ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            width: 420px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #6a1b9a;
+            font-weight: bold;
+        }
+        h2 {
+            text-align: center;
+            color: #6a1b9a;
+        }
+        input {
+            width: 95%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #6a1b9a;
+            color: white;
+            padding: 12px;
+            border: none;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            color: #6a1b9a;
+            font-weight: bold;
+        }
+        .error {
+            background: #fdecea;
+            color: #c62828;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <a href="{{ url_for('routes.dashboard') }}" class="back-btn">← Dashboard</a>
+
+    <h2>🌸 Menstrual Cycle Tracker</h2>
+
+    <form method="POST">
+        <input type="number" name="age" placeholder="Age (10–55)" min="10" max="55" required>
+        <input type="number" name="weight" placeholder="Weight (kg, >10)" min="11" step="0.1" required>
+        <input type="number" name="cycle_length" placeholder="Cycle Length (days)" min="1" required>
+        <input type="date" name="last_period" required>
+        <button type="submit">Predict Next Cycle</button>
+    </form>
+
+    {% if result %}
+        <div class="result">
+            Your next expected period date is<br>
+            <span style="font-size:20px;">{{ result }}</span>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="result error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+</div>
+</body>
+</html>
