@@ -1,171 +1,444 @@
-📸 Dashboard Preview
+# 🌸 GyneCare
+## AI-Powered Gynecological Disease Diagnosis Expert System
 
+<div align="center">
 
-Dashboard Overview
+### "Empowering Women's Healthcare Through Artificial Intelligence"
 
-The dashboard provides users with a centralized view of their reproductive health. It displays menstrual cycle information, health statistics, genetic risk analysis, doctor's notes, and AI-powered recommendations in a clean and interactive interface.
+GyneCare is an intelligent healthcare platform designed to assist women in the early detection of gynecological diseases using Artificial Intelligence, Deep Learning, Medical Image Analysis, and Predictive Healthcare technologies.
 
-🔐 Login Page
-<p align="center"> <img src="screenshots/login.png" width="850" alt="Login Page"> </p>
+</div>
 
-The login system securely authenticates users before allowing access to personal health records. Passwords are encrypted, and user sessions are securely managed.
+---
 
-👤 Registration Page
-<p align="center"> <img src="screenshots/register.png" width="850" alt="Registration Page"> </p>
+# 📖 About the Project
 
-New users can create an account by entering their personal details. The registration process stores information securely in MongoDB.
+Gynecological diseases such as **Polycystic Ovary Syndrome (PCOS), Ovarian Cancer, Cervical Cancer, Uterine Disorders, and other reproductive health conditions** affect millions of women worldwide. Early diagnosis is often delayed due to lack of awareness, limited access to specialists, and insufficient healthcare facilities.
 
-🏥 AI Disease Prediction
-<p align="center"> <img src="screenshots/upload_scan.png" width="850" alt="Upload Scan"> </p>
+**GyneCare** aims to bridge this gap by providing an AI-powered healthcare platform that assists users in monitoring their reproductive health. The application combines machine learning, deep learning, medical image analysis, and health tracking into a single integrated system.
 
-Users can upload medical images such as:
+Instead of replacing doctors, the system acts as an intelligent decision-support tool that helps users understand potential health risks, monitor menstrual health, analyze symptoms, assess genetic risks, and receive preliminary disease predictions.
 
-Ultrasound Scans
-MRI Images
-Cervical Images
+---
 
-The uploaded image is processed using a CNN/ResNet deep learning model to predict possible gynecological diseases.
+# 🎯 Problem Statement
 
-📊 Prediction Result
-<p align="center"> <img src="screenshots/prediction.png" width="850" alt="Prediction Result"> </p>
+Many women experience delayed diagnosis of gynecological diseases because:
 
-The AI model provides:
+- Limited awareness about symptoms
+- Lack of specialist availability in rural areas
+- Manual analysis of medical scans consumes time
+- Difficulty tracking long-term reproductive health
+- Limited access to personalized healthcare guidance
 
-Predicted Disease
-Confidence Score
-Medical Recommendation
-Risk Level
+This project addresses these challenges by integrating AI-based disease prediction with health monitoring and personalized recommendations.
 
-This assists healthcare professionals in making faster preliminary assessments.
+---
 
-🩺 Symptom Checker
-<p align="center"> <img src="screenshots/symptom_checker.png" width="850" alt="Symptom Checker"> </p>
+# 🎯 Objectives
 
-The Symptom Checker allows users to describe their symptoms in natural language.
+The primary objectives of GyneCare are:
+
+- Detect gynecological diseases at an early stage using AI.
+- Assist doctors by providing preliminary image analysis.
+- Enable women to monitor menstrual and reproductive health.
+- Predict disease risks using machine learning models.
+- Provide personalized healthcare recommendations.
+- Improve healthcare accessibility through a web-based platform.
+- Encourage preventive healthcare practices.
+
+---
+
+# 💡 Key Features
+
+## 🔐 1. Secure User Authentication
+
+The system provides a secure authentication mechanism where users can register and log in safely.
+
+### Features
+
+- User Registration
+- Secure Login
+- Password Encryption
+- Session Management
+- User Dashboard
+
+---
+
+## 🏥 2. AI-Based Disease Diagnosis
+
+One of the core features of GyneCare is automated disease prediction from medical images.
+
+Users can upload medical scans such as:
+
+- Ultrasound Images
+- MRI Scans
+- Cervical Images
+
+The uploaded image undergoes preprocessing before being passed to a Deep Learning model.
+
+The system predicts diseases including:
+
+- Polycystic Ovary Syndrome (PCOS)
+- Ovarian Cancer
+- Cervical Cancer
+- Uterine Disorders
+
+The prediction result includes:
+
+- Predicted Disease
+- Confidence Score
+- Medical Recommendation
+
+---
+
+## 🧠 3. Deep Learning Model
+
+The disease prediction module is powered using Convolutional Neural Networks (CNN) and ResNet architecture.
+
+### Workflow
+
+Medical Image
+
+⬇
+
+Image Preprocessing
+
+⬇
+
+Feature Extraction
+
+⬇
+
+CNN / ResNet Model
+
+⬇
+
+Disease Prediction
+
+⬇
+
+Recommendation Generation
+
+This approach improves prediction accuracy while reducing manual diagnosis time.
+
+---
+
+## 🩺 4. Intelligent Symptom Checker
+
+Users can describe their symptoms in natural language.
 
 Example:
 
-"I have irregular periods, pelvic pain, and severe cramps."
+"I have irregular periods, pelvic pain and weight gain."
 
-The NLP engine extracts symptoms, compares them with trained disease patterns, and predicts possible conditions.
+The NLP module extracts meaningful medical symptoms and compares them with trained disease patterns.
 
-📅 Menstrual Cycle Tracker
-<p align="center"> <img src="screenshots/cycle_tracker.png" width="850" alt="Cycle Tracker"> </p>
+The system then predicts possible conditions and recommends whether medical consultation is necessary.
 
-The menstrual cycle tracker predicts:
+---
 
-Current Cycle Phase
-Fertile Window
-Ovulation Period
-Next Period Date
-Remaining Days
+## 📅 5. Menstrual Cycle Tracker
 
-Users can also log daily symptoms and moods for improved prediction accuracy.
+The menstrual cycle module helps users monitor reproductive health.
 
-🧬 Genetic Risk Assessment
-<p align="center"> <img src="screenshots/genetic_risk.png" width="850" alt="Genetic Risk"> </p>
+It predicts:
 
-Based on family history and lifestyle information, the Genetic Risk module estimates the probability of inherited gynecological diseases and provides preventive recommendations.
+- Current Cycle Phase
+- Ovulation Window
+- Fertile Period
+- Next Menstrual Date
+- Remaining Days
 
-🤖 AI Health Chatbot
-<p align="center"> <img src="screenshots/chatbot.png" width="850" alt="Health Chatbot"> </p>
+Users can also log symptoms, moods, and cycle history for more personalized predictions.
 
-The integrated AI chatbot answers common healthcare questions related to:
+---
 
-PCOS
-Ovarian Cancer
-Menstrual Health
-Fertility
-Lifestyle
-Nutrition
-🗄️ Database Architecture
-<p align="center"> <img src="screenshots/database.png" width="850" alt="Database"> </p>
+## 🧬 6. Genetic Risk Assessment
 
-MongoDB stores:
+This module estimates inherited disease risks based on:
 
-User Accounts
-Medical Reports
-Prediction History
-Menstrual Records
-Genetic Risk Reports
-🧠 AI Workflow
-<p align="center"> <img src="screenshots/workflow.png" width="900" alt="Workflow"> </p>
-User Uploads Medical Image
-            │
-            ▼
- Image Preprocessing
-            │
-            ▼
- Feature Extraction
-            │
-            ▼
- CNN / ResNet Model
-            │
-            ▼
- Disease Prediction
-            │
-            ▼
- Recommendation Engine
-            │
-            ▼
- Dashboard Display
-🏗️ System Architecture
-<p align="center"> <img src="screenshots/architecture.png" width="950" alt="Architecture"> </p>
+- Family Medical History
+- Lifestyle
+- Age
+- Personal Health Information
+
+The system calculates:
+
+- Risk Score
+- Risk Level
+- Personalized Preventive Suggestions
+
+---
+
+## 📊 7. Personalized Health Dashboard
+
+The dashboard acts as the central control panel for users.
+
+It displays:
+
+- Current Health Status
+- Disease Prediction History
+- Menstrual Cycle Status
+- Fertility Window
+- Genetic Risk Score
+- Doctor's Notes
+- AI Recommendations
+
+The dashboard is designed to provide a complete overview of the user's reproductive health.
+
+---
+
+## 🤖 8. AI Health Chatbot
+
+The integrated chatbot assists users by answering healthcare-related questions.
+
+It can provide information regarding:
+
+- Diseases
+- Symptoms
+- Lifestyle Improvements
+- Nutrition
+- Preventive Care
+- Medical Guidance
+
+The chatbot offers educational support but does not replace professional medical advice.
+
+---
+
+## 🌍 9. Multi-Language Support
+
+To improve accessibility, the application supports multiple languages, enabling users from different regions to interact comfortably with the platform.
+
+---
+
+# ⚙️ System Architecture
+
+```
                     User
                       │
                       ▼
-               Flask Application
+          Flask Web Application
                       │
-      ┌───────────────┼──────────────┐
-      ▼               ▼              ▼
- Authentication  Dashboard   Symptom Checker
-      │               │              │
-      ▼               ▼              ▼
- MongoDB        AI Prediction     NLP Engine
+      ┌───────────────┼───────────────┐
+      ▼               ▼               ▼
+ Authentication   Dashboard     Symptom Checker
+      │               │               │
+      ▼               ▼               ▼
+ MongoDB Database   Health Data   NLP Processing
+                      │
+                      ▼
+             Medical Image Upload
+                      │
+                      ▼
+              Image Preprocessing
                       │
                       ▼
               CNN / ResNet Model
                       │
                       ▼
-             Disease Prediction
+            Disease Prediction
                       │
                       ▼
-          Personalized Recommendation
-📈 Future Enhancements
-<p align="center"> <img src="screenshots/future_scope.png" width="900" alt="Future Scope"> </p>
+         Recommendation Generation
+                      │
+                      ▼
+              Results Dashboard
+```
 
-Planned enhancements include:
+---
 
-📱 Mobile Application
-☁️ Cloud Deployment
-🩺 Doctor Consultation Portal
-📅 Appointment Booking
-🎙️ Voice Assistant
-⌚ Wearable Device Integration
-🧾 Electronic Health Record (EHR) Support
-📁 Suggested GitHub Folder Structure
+# 🛠️ Technology Stack
+
+## Frontend
+
+The user interface is developed using:
+
+- HTML5
+- CSS3
+- JavaScript
+
+The interface is designed to be responsive, user-friendly, and accessible.
+
+---
+
+## Backend
+
+The backend is developed using **Python Flask**, which handles:
+
+- User Authentication
+- Routing
+- Disease Prediction
+- Database Communication
+- API Integration
+
+---
+
+## Database
+
+MongoDB is used to securely store:
+
+- User Information
+- Login Credentials
+- Health Records
+- Prediction History
+- Menstrual Data
+
+---
+
+## Artificial Intelligence
+
+The AI module utilizes:
+
+- TensorFlow
+- Keras
+- CNN
+- ResNet50
+- OpenCV
+- NumPy
+- Pandas
+
+These technologies perform image preprocessing, feature extraction, and disease classification.
+
+---
+
+# 📂 Project Structure
+
+```
 GyneCare/
 │
-├── screenshots/
-│   ├── dashboard.png
-│   ├── login.png
-│   ├── register.png
-│   ├── upload_scan.png
-│   ├── prediction.png
-│   ├── chatbot.png
-│   ├── cycle_tracker.png
-│   ├── symptom_checker.png
-│   ├── genetic_risk.png
-│   ├── architecture.png
-│   ├── workflow.png
-│   ├── database.png
-│   └── future_scope.png
-│
 ├── static/
+│   ├── css/
+│   ├── js/
+│   ├── images/
+│
 ├── templates/
+│   ├── login.html
+│   ├── register.html
+│   ├── dashboard.html
+│   ├── upload_scan.html
+│   ├── chatbot.html
+│   ├── symptom_checker.html
+│   ├── menstrual_cycle.html
+│   └── genetic_risk.html
+│
+├── models/
+│   ├── cnn_model.h5
+│   ├── resnet_model.h5
+│
+├── uploads/
+│
 ├── app.py
+├── config.py
 ├── requirements.txt
 └── README.md
-Tip for your repository
+```
 
-Use your own project screenshots instead of placeholders. For architecture and workflow diagrams, create clean visuals using draw.io, Lucidchart, Canva, or Figma. This makes your repository look much more professional and helps reviewers quickly understand your project.
+---
+
+# 🚀 Installation Guide
+
+### Clone the repository
+
+```bash
+git clone https://github.com/yourusername/GyneCare.git
+```
+
+### Navigate to the project directory
+
+```bash
+cd GyneCare
+```
+
+### Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+### Activate the environment
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Linux/macOS
+
+```bash
+source venv/bin/activate
+```
+
+### Install required packages
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run the application
+
+```bash
+python app.py
+```
+
+Open your browser and visit:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+# 🔮 Future Scope
+
+Future enhancements planned for GyneCare include:
+
+- Mobile application development
+- Doctor consultation portal
+- Appointment scheduling
+- Electronic Health Record (EHR) integration
+- Wearable device synchronization
+- Voice-based AI assistant
+- Cloud deployment
+- Explainable AI for prediction transparency
+- Real-time patient monitoring
+- Personalized treatment recommendations
+
+---
+
+# 👩‍💻 Author
+
+**Khushi Gowda**
+
+AI Engineer | Python Full Stack Developer | Machine Learning Enthusiast | DevOps Learner
+
+### Technical Skills
+
+- Python
+- Flask
+- Django
+- Machine Learning
+- Deep Learning
+- TensorFlow
+- OpenCV
+- MongoDB
+- SQL
+- Git & GitHub
+- HTML
+- CSS
+- JavaScript
+
+---
+
+# 📜 Disclaimer
+
+This project is developed for educational and research purposes. The AI-generated predictions are intended to assist users and healthcare professionals but should not be considered a substitute for professional medical diagnosis or treatment.
+
+---
+
+# ⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+Your support motivates further improvements and future healthcare innovations.
